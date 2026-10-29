@@ -1,5 +1,23 @@
 # Employee Management & Analytics System
 
+![Python Tests](https://github.com/SrikaarSheela/Employee-Management-Analytics-System/actions/workflows/python-tests.yml/badge.svg)
+
+## Project Overview
+
+An end-to-end Data Engineering project using
+MySQL, Python, Pandas, SQLAlchemy, Streamlit,
+Pytest, and GitHub Actions.
+
+### Features
+- Employee and department management
+- Automated ETL pipeline
+- Salary and compensation analytics
+- Interactive Streamlit dashboard
+- Automated data-quality validation
+- GitHub Actions CI pipeline
+
+# Employee Management & Analytics System
+
 ## Project Overview
 
 An end-to-end Data Engineering project that extracts employee information from MySQL, transforms data using Python and Pandas, loads analytical results into MySQL, and presents business insights through an interactive Streamlit dashboard.
