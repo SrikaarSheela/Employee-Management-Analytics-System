@@ -1,91 +1,160 @@
-# Employee Management & Analytics System
-
-![Python Tests](https://github.com/SrikaarSheela/Employee-Management-Analytics-System/actions/workflows/python-tests.yml/badge.svg)
-
-## Project Overview
-
-An end-to-end Data Engineering project using
-MySQL, Python, Pandas, SQLAlchemy, Streamlit,
-Pytest, and GitHub Actions.
-
-### Features
-- Employee and department management
-- Automated ETL pipeline
-- Salary and compensation analytics
-- Interactive Streamlit dashboard
-- Automated data-quality validation
-- GitHub Actions CI pipeline
 
 # Employee Management & Analytics System
 
-## Project Overview
+A Python and MySQL Data Engineering project that transforms
+employee, salary, and department records into analytics-ready data.
 
-An end-to-end Data Engineering project that extracts employee information from MySQL, transforms data using Python and Pandas, loads analytical results into MySQL, and presents business insights through an interactive Streamlit dashboard.
+## Tech Stack
 
-## Technology Stack
+- Python
+- MySQL 8
+- SQLAlchemy
+- Pandas
+- Streamlit
+- Pytest
+- GitHub Actions
+- Git and GitHub
 
-- **Database:** MySQL
-- **Programming:** Python 3
-- **Data Processing:** Pandas
-- **Database Connectivity:** SQLAlchemy and PyMySQL
-- **Dashboard:** Streamlit and Plotly
-- **Testing:** Pytest
-- **Version Control:** Git and GitHub
+## Architecture
 
-## Key Features
+MySQL Source Tables
+        |
+        v
+Python Extract
+        |
+        v
+Data Transformation
+        |
+        v
+MySQL Analytics Table
+        |
+        v
+Streamlit Dashboard
 
-- Employee, department, salary, project, and attendance data management
-- Automated Extract, Transform, Load (ETL) pipeline
-- Salary and total compensation analytics
-- Interactive department and project dashboards
-- Attendance reporting
-- Automated SQL data quality checks
-- Pipeline execution history and error logging
-- Automated Python data validation tests
+Incremental ETL uses timestamp-based change detection,
+checkpoint tracking, and MySQL upsert operations.
 
-## ETL Architecture
+## Features
 
-MySQL Source Tables → Python Extraction → CSV Files → Pandas Transformation → MySQL Analytics Table → Streamlit Dashboard
+- Employee and salary data management
+- SQL-based employee analytics
+- Python ETL pipeline
+- Salary and bonus calculations
+- Incremental data extraction and loading
+- ETL checkpoint management
+- Duplicate prevention through primary-key upserts
+- Automated data-quality testing
+- Streamlit analytics dashboard
+- GitHub Actions continuous integration
 
-## Sample Data
+## Project Structure
 
-The project uses synthetic employee data for development and demonstration.
+Employee_Management_System/
+├── .github/workflows/
+├── dashboard/
+│   └── app.py
+├── reports/
+├── sql/
+├── src/
+│   ├── db_connection.py
+│   ├── extract.py
+│   ├── transform.py
+│   ├── load.py
+│   ├── incremental_extract.py
+│   └── incremental_load.py
+├── tests/
+│   ├── test_data_quality.py
+│   ├── test_incremental_etl.py
+│   └── test_incremental_integration.py
+├── .env.example
+├── .gitignore
+├── main.py
+└── README.md
 
-- 10 employees
-- 5 departments
-- 5 projects
-- 50 records across six source tables
-- $1,035,000 annual salary total
-- $1,109,000 total compensation
+## Getting Started
 
-## Local Setup
+### 1. Clone the repository
 
-1. Install Python and MySQL.
-2. Clone the repository.
-3. Create and activate a Python virtual environment.
-4. Install dependencies using `pip install -r requirements.txt`.
-5. Configure `.env` using `.env.example`.
-6. Initialize and populate the MySQL database using the project's SQL setup scripts.
-7. Run the ETL pipeline with `python main.py`.
-8. Run the dashboard with `python -m streamlit run dashboard/app.py`.
+git clone https://github.com/SrikaarSheela/Employee-Management-Analytics-System.git
 
-## Automated Testing
+cd Employee-Management-Analytics-System
 
-Run:
+### 2. Create a virtual environment
 
-`python -m pytest tests/ -v`
+python3 -m venv .venv
 
-The current project includes 10 automated data quality tests.
+source .venv/bin/activate
+
+### 3. Install dependencies
+
+pip install -r requirements.txt
+
+### 4. Configure MySQL
+
+Create the company_db database and initialize the
+tables using the SQL scripts in the sql/ directory.
+
+### 5. Configure environment variables
+
+Copy .env.example to .env and update your local
+database connection settings.
+
+Never commit real database credentials.
+
+### 6. Run the full ETL pipeline
+
+python main.py
+
+### 7. Run incremental ETL
+
+python src/incremental_load.py
+
+### 8. Run automated tests
+
+python -m pytest tests/ -v
+
+### 9. Start the analytics dashboard
+
+streamlit run dashboard/app.py
+
+## Incremental ETL
+
+The incremental pipeline:
+
+1. Reads the previous checkpoint.
+2. Identifies changed employee and salary records.
+3. Retrieves employee and department information.
+4. Calculates total compensation.
+5. Inserts or updates the analytics table.
+6. Advances the checkpoint within the load transaction.
+
+Timestamp-boundary and concurrent-update handling require
+further hardening before production deployment.
+
+## Data Quality
+
+Tests cover:
+
+- Compensation calculations
+- Null bonus handling
+- Employee change detection
+- Salary change detection
+- Unchanged record filtering
+- Initial extraction behavior
+- Duplicate prevention logic
+- Analytics-to-source reconciliation
+- Checkpoint presence
 
 ## Future Improvements
 
-- Incremental ETL processing
-- CI/CD with GitHub Actions
-- Historical salary tracking
-- Advanced attendance reporting
-- Scheduled pipeline execution
+- Stronger concurrency-safe incremental processing
+- Automated scheduling
+- Data lineage and observability
 - Containerized deployment
+- Cloud data warehouse integration
 
-## Purpose
+## Author
 
-Built as a hands-on Data Engineering portfolio project demonstrating SQL, Python, ETL development, data quality validation, analytics, testing, and pipeline monitoring.
+Srikaar Reddy Sheela
+
+Data Engineering Portfolio Project
