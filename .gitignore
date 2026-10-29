@@ -1,0 +1,43 @@
+
+# Environment variables and credentials
+.env
+.env.*
+!.env.example
+
+# Python virtual environment
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Generated data
+data/*.csv
+reports/*.csv
+reports/test_results/
+
+# Logs
+logs/
+*.log
+
+# Mac files
+.DS_Store
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Temporary files
+*.tmp
+*.bak
+main_backup.py
+
+# Local database backup
+sql/05_full_database_backup.sql
+
+# SQL exports pending verification
+sql/*.sql
+
+# Local AI development tools
+.agents/
