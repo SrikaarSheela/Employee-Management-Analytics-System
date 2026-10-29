@@ -104,3 +104,27 @@ CREATE TABLE `salaries` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 SET FOREIGN_KEY_CHECKS=1;
+
+
+-- Incremental ETL checkpoint table
+
+CREATE TABLE IF NOT EXISTS etl_checkpoints (
+    pipeline_name VARCHAR(100) PRIMARY KEY,
+    last_processed_timestamp DATETIME(6),
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Initialize checkpoint for GitHub Actions tests
+
+INSERT INTO etl_checkpoints (
+    pipeline_name,
+    last_processed_timestamp
+)
+VALUES (
+    'Employee Incremental ETL',
+    '2026-10-29 00:00:00.000000'
+)
+ON DUPLICATE KEY UPDATE
+    pipeline_name = VALUES(pipeline_name);
+
