@@ -47,6 +47,16 @@ jobs:
           pip install -r requirements.txt
           pip install pytest
 
+      - name: Initialize test database
+        run: |
+          mysql -h 127.0.0.1 -uroot -ptest_password company_db < sql/06_ci_schema.sql
+          mysql -h 127.0.0.1 -uroot -ptest_password company_db < sql/02_sample_data.sql
+
+      - name: Generate analytics CSV
+        run: |
+          python -c "import sys; sys.path.insert(0, 'src'); from extract import extract_data; extract_data()"
+          python -c "import sys; sys.path.insert(0, 'src'); from transform import transform_employee_data; transform_employee_data()"
+
       - name: Run automated tests
         run: |
           python -m pytest tests/ -v
