@@ -153,6 +153,23 @@ Tests cover:
 - Containerized deployment
 - Cloud data warehouse integration
 
+
+
+---
+
+## Employee Analytics Dashboard Report
+
+This project includes a PDF report demonstrating
+the Employee Management & Analytics System dashboard.
+
+The report provides a visual overview of the
+employee analytics and reporting functionality.
+
+### View Dashboard Report
+
+[View Employee Analytics Dashboard (PDF)](reports/dashboard_report.pdf)
+
+
 ## Author
 
 Srikaar Reddy Sheela
